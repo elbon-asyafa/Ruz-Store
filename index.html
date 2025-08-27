@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruz Store | Sedia ATK & Pulsa/Kuota</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo Toko">
+      <h1>Ruz Store | Sedia ATK & Pulsa/Kuota</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#atk">Alat Tulis</a></li>
+        <li><a href="#pulsa">Pulsa & Kuota</a></li>
+        <li><button id="openCartBtn">🛒 Keranjang</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Selamat Datang di Ruz Store</h1>
+    <p>Belanja Alat Tulis & Isi Pulsa lebih mudah dan cepat 🚀</p>
+  </section>
+
+  <div class="container">
+    <!-- ALAT TULIS -->
+    <h2 id="atk">📚 Alat Tulis Sekolah</h2>
+    <div class="products">
+      <div class="card">
+        <img src="img/pensil2b.jpg" alt="Pensil 2B">
+        <h3>Pensil 2B</h3>
+        <p>Rp 1.500</p>
+        <button onclick="addToCart('Pensil 2B', 1500)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/isipulpen.jpg" alt="Isi Pulpen Kenko 0.5">
+        <h3>Isi Pulpen Kenko 0.5</h3>
+        <p>Rp 1.500</p>
+        <button onclick="addToCart('Isi Pulpen Kenko 0.5', 1500)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/label.jpg" alt="Label">
+        <h3>Label</h3>
+        <p>Rp 2.000</p>
+        <button onclick="addToCart('Label', 2000)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/pulpen-haris.jpg" alt="Pulpen Haris 0.5">
+        <h3>Pulpen Haris 0.5</h3>
+        <p>Rp 3.000</p>
+        <button onclick="addToCart('Pulpen Haris 0.5', 3000)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/penghapus.jpg" alt="Penghapus">
+        <h3>Penghapus</h3>
+        <p>Rp 1.500</p>
+        <button onclick="addToCart('Penghapus', 1500)">Tambah</button>
+      </div>
+    </div>
+
+    <!-- PULSA -->
+    <h2 id="pulsa" style="margin-top:40px;">📱 Pulsa & Kuota</h2>
+    <div class="products">
+      <div class="card">
+        <img src="img/byu.jpg" alt="by.u">
+        <h3>Kuota/Pulsa By.u</h3>
+        <p>Chat penjual untuk harga</p>
+        <button onclick="addToCart('Pulsa/Kuota By.u', 0, true)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/indosat.png" alt="Indosat">
+        <h3>Kuota/Pulsa Indosat</h3>
+        <p>Chat penjual untuk harga</p>
+        <button onclick="addToCart('Pulsa/Kuota Indosat', 0, true)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/smartfren.jpg" alt="Smartfren">
+        <h3>Kuota/Pulsa Smartfren</h3>
+        <p>Chat penjual untuk harga</p>
+        <button onclick="addToCart('Pulsa/Kuota Smartfren', 0, true)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/telkomsel.jpg" alt="Telkomsel">
+        <h3>Kuota/Pulsa Telkomsel</h3>
+        <p>Chat penjual untuk harga</p>
+        <button onclick="addToCart('Pulsa/Kuota Telkomsel', 0, true)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/tri.jpg" alt="Tri">
+        <h3>Kuota/Pulsa Tri</h3>
+        <p>Chat penjual untuk harga</p>
+        <button onclick="addToCart('Pulsa/Kuota Tri', 0, true)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/xl.png" alt="XL">
+        <h3>Kuota/Pulsa XL</h3>
+        <p>Chat penjual untuk harga</p>
+        <button onclick="addToCart('Pulsa/Kuota XL', 0, true)">Tambah</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR CART -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <button id="closeCartBtn">Tutup ✖</button>
+    <h2>🛒 Keranjang Belanja</h2>
+    <ul id="cartItems"></ul>
+    <h3>Total: Rp <span id="totalPrice">0</span></h3>
+
+    <form id="checkoutForm">
+      <input type="text" id="buyerName" placeholder="Nama Anda" required>
+      <input type="text" id="buyerClass" placeholder="Kelas Anda" required>
+      <textarea id="buyerNote" placeholder="Keterangan (WAJIB isi jika beli pulsa/kuota)"></textarea>
+      <small>⚠️ Wajib isi keterangan jika membeli pulsa/kuota (provider & nominal). Jika hanya beli ATK, bisa skip.</small>
+      <button type="submit">Checkout</button>
+    </form>
+
+    <div id="waOptions">
+  <p class="wa-note">📩 Pesananmu siap diproses! Pilih salah satu admin WhatsApp untuk konfirmasi 👇</p>
+  <a href="#" target="_blank" id="waElbon">
+    💬 Chat Elbon (Admin Utama)
+  </a>
+  <a href="#" target="_blank" id="waHaeru">
+    💬 Chat Haeru (Admin Support)
+  </a>
+  <p class="wa-subnote">⚠️ Chat salah satu admin untuk konfirmasi pembelian.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Ruz Store | Big thanks to GPT</p>
+    <p>
+      <a href="https://www.instagram.com/reint_asy/" target="_blank">Instagram Elbon</a> | 
+      <a href="https://www.instagram.com/haerruuu_/" target="_blank">Instagram Haeru</a>
+    </p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <a href="https://wa.me/6283825146838?text=Halo%20Admin%20RuzStore%21%20Saya%20ingin%20bertanya%20tentang%20produk.%20🙏" 
+   class="floating-wa" target="_blank">
+   <i>💬</i> Chat Admin
+</a>
+</body>
+</html>
