@@ -1,8 +1,17 @@
 let cart = [];
 
+// Toast popup
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.className = "show";
+  setTimeout(() => {
+    toast.className = toast.className.replace("show", "");
+  }, 2500);
+}
+
 // Tambah ke keranjang
 function addToCart(name, price, isPulsa = false) {
-  // Jika barang sudah ada di keranjang, tambah qty
   let existingItem = cart.find(item => item.name === name);
   if (existingItem) {
     existingItem.qty += 1;
@@ -10,6 +19,9 @@ function addToCart(name, price, isPulsa = false) {
     cart.push({ name, price, qty: 1, isPulsa });
   }
   updateCart();
+
+  // Toast
+  showToast("✅ Produk telah ditambahkan di keranjang, silahkan cek keranjang!");
 }
 
 // Update keranjang
@@ -23,7 +35,7 @@ function updateCart() {
     let li = document.createElement("li");
     li.innerHTML = `
       ${item.name} x${item.qty} - Rp ${(item.price * item.qty).toLocaleString()}
-      <button class="remove-btn" onclick="removeFromCart(${index})">❌ Hapus</button>
+      <button class="remove-btn" onclick="removeFromCart(${index})">❌</button>
     `;
     cartItems.appendChild(li);
     total += item.price * item.qty;
@@ -32,18 +44,19 @@ function updateCart() {
   totalPrice.textContent = total.toLocaleString();
 }
 
-// Hapus item dari keranjang
+// Hapus item
 function removeFromCart(index) {
   cart.splice(index, 1);
   updateCart();
+  showToast("🗑️ Produk dihapus dari keranjang");
 }
 
-// Cart Sidebar
+// Sidebar toggle
 const cartSidebar = document.getElementById("cartSidebar");
-document.getElementById("openCartBtn").onclick = () => cartSidebar.classList.add("active");
-document.getElementById("closeCartBtn").onclick = () => cartSidebar.classList.remove("active");
+document.getElementById("floatingCartBtn").onclick = () => {
+  cartSidebar.classList.toggle("active");
+};
 
-// Checkout
 // Checkout
 document.getElementById("checkoutForm").addEventListener("submit", function(e) {
   e.preventDefault();
@@ -53,28 +66,24 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e) {
   const note = document.getElementById("buyerNote").value.trim();
 
   if (!name || !kelas) {
-    alert("Nama dan Kelas wajib diisi!");
+    showToast("⚠️ Nama dan Kelas wajib diisi!");
     return;
   }
 
-  // Jika ada item pulsa/kuota, wajib isi keterangan
   const hasPulsa = cart.some(item => item.isPulsa);
   if (hasPulsa && !note) {
-    alert("Anda membeli pulsa/kuota, keterangan WAJIB diisi!");
+    showToast("⚠️ Anda membeli pulsa/kuota, keterangan WAJIB diisi!");
     return;
   }
 
-  // Tampilkan pilihan admin WA
   document.getElementById("waOptions").style.display = "block";
 
-  // Event listener untuk WA buttons agar selalu ambil data terbaru
   function buildMessage() {
     if (cart.length === 0) {
       return encodeURIComponent("🛒 Keranjang kosong, belum ada pesanan.");
     }
 
     let total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
-
     let orderList = cart.map(item => 
       `- ${item.name} x${item.qty} (Rp ${(item.price * item.qty).toLocaleString()})`
     ).join("\n");
@@ -103,5 +112,6 @@ ${orderList}
   document.getElementById("waHaeru").onclick = function() {
     this.href = `https://wa.me/6285179599831?text=${buildMessage()}`;
   };
-});
 
+  showToast("✅ Pesanan siap, pilih admin WhatsApp untuk konfirmasi!");
+});

@@ -18,7 +18,6 @@
       <ul>
         <li><a href="#atk">Alat Tulis</a></li>
         <li><a href="#pulsa">Pulsa & Kuota</a></li>
-        <li><button id="openCartBtn">🛒 Keranjang</button></li>
       </ul>
     </nav>
   </header>
@@ -62,6 +61,18 @@
         <h3>Penghapus</h3>
         <p>Rp 1.500</p>
         <button onclick="addToCart('Penghapus', 1500)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/buku.jpg" alt="Buku">
+        <h3>Buku</h3>
+        <p>Rp 4.500</p>
+        <button onclick="addToCart('Buku', 4500)">Tambah</button>
+      </div>
+      <div class="card">
+        <img src="img/sampul.jpg" alt="Sampul">
+        <h3>Sampul Buku</h3>
+        <p>Rp 1.000</p>
+        <button onclick="addToCart('Sampul', 1000)">Tambah</button>
       </div>
     </div>
 
@@ -109,7 +120,6 @@
 
   <!-- SIDEBAR CART -->
   <div class="cart-sidebar" id="cartSidebar">
-    <button id="closeCartBtn">Tutup ✖</button>
     <h2>🛒 Keranjang Belanja</h2>
     <ul id="cartItems"></ul>
     <h3>Total: Rp <span id="totalPrice">0</span></h3>
@@ -123,14 +133,14 @@
     </form>
 
     <div id="waOptions">
-  <p class="wa-note">📩 Pesananmu siap diproses! Pilih salah satu admin WhatsApp untuk konfirmasi 👇</p>
-  <a href="#" target="_blank" id="waElbon">
-    💬 Chat Elbon (Admin Utama)
-  </a>
-  <a href="#" target="_blank" id="waHaeru">
-    💬 Chat Haeru (Admin Support)
-  </a>
-  <p class="wa-subnote">⚠️ Chat salah satu admin untuk konfirmasi pembelian.</p>
+      <p class="wa-note">📩 Pesananmu siap diproses! Pilih salah satu admin WhatsApp untuk konfirmasi 👇</p>
+      <a href="#" target="_blank" id="waElbon">
+        💬 Chat Elbon (Admin Utama)
+      </a>
+      <a href="#" target="_blank" id="waHaeru">
+        💬 Chat Haeru (Admin Support)
+      </a>
+      <p class="wa-subnote">⚠️ Chat salah satu admin untuk konfirmasi pembelian.</p>
     </div>
   </div>
 
@@ -143,10 +153,18 @@
     </p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <!-- Floating Cart Button -->
+  <button id="floatingCartBtn" class="floating-cart">🛒</button>
+
+  <!-- Floating WhatsApp Button -->
   <a href="https://wa.me/6283825146838?text=Halo%20Admin%20RuzStore%21%20Saya%20ingin%20bertanya%20tentang%20produk.%20🙏" 
    class="floating-wa" target="_blank">
    <i>💬</i> Chat Admin
-</a>
+  </a>
+
+  <!-- Toast Notification -->
+  <div id="toast"></div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
